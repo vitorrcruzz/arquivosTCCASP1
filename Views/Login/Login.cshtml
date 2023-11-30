@@ -1,0 +1,63 @@
+﻿@model AspViagens.Models.login
+@{
+    ViewBag.Title = "Login";
+}
+
+<link href="~/Styles/login.css" rel="stylesheet" />
+<link href="~/Styles/reset.css" rel="stylesheet" />
+
+@using (Html.BeginForm("VerificaUsuario", "Login", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container form-horizontal" style="padding:1.5rem;">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div class="row fundo">
+            <div class="col box-inputs">
+                <div>
+                    <h2 class="subtitulo1">Bem vindo de volta! 👋</h2>
+                    <p>Insira os dados usados ao criar a conta.</p>
+                </div>
+                <div class="form-group">
+                    <br />
+                    @if (TempData["Mensagem Erro"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+                            @TempData["Mensagem Erro"]
+                        </div>
+                    }
+
+                    <div class="col-md-10">
+                       
+                        @Html.EditorFor(model => model.dsLogin, new { htmlAttributes = new { @class = "form-control input", placeholder = "Login" } })
+                        @Html.ValidationMessageFor(model => model.dsLogin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.dsSenha, new { htmlAttributes = new { @class = "form-control input", placeholder = "Senha", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.dsSenha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Entrar" class="btn-dark-blue-large" />
+                </div>
+                <p>Não tem uma conta? @Html.ActionLink("Cadastre-se", "Cadastrar", "Login")</p>
+            </div>
+            <div class="col">
+                <img class="img-login" src="https://caravaggiopraiahotel.com.br/wp-content/uploads/2020/04/Primeira-viagem-de-aviao.jpg"  />
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AspViagens.Models.Banco.Pacote>
+<link href="~/Models/Style/Cadastrar/style.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<table class="table">
+    @if (Model == null)
+    {
+        <h2>Voçe não possui pacotes cadastrados</h2>
+    }
+    else
+    {
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.nmPacote)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.dsPreco)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Imagem)
+    </th>
+    <th>
+        <h5>Data da Compra</h5>
+    </th>
+</tr>
+
+        foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nmPacote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dsPreco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Imagem)
+                </td>
+                <td>
+                    @ViewBag.dtComp;
+                </td>
+            </tr>
+        }
+    }
+
+</table>

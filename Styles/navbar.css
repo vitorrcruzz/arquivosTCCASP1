@@ -1,0 +1,17 @@
+﻿.login{
+    background-color: transparent;
+    border: none;
+    color: #000033;
+    text-decoration: none;
+}
+    .login:hover {
+        cursor: pointer;
+        color: #48D597;
+        transition: 0.2s;
+    }
+.icons-nav, .form-group.fim {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<AspViagens.Models.Banco.Pacote>
+@{
+    ViewBag.Title = "SaibaMais";
+}
+
+@if (ViewBag.nnPlano != null)
+{
+    <h2>@ViewBag.nnPlano</h2>
+}
+@if (TempData["Mensagem Erro ADM"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["Mensagem Erro ADM"]
+    </div>
+}
+else
+{
+    <div class="container py-5">
+        @foreach (var item in Model)
+        {
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-12 col-xl-10">
+                    <div class="card shadow-0 border rounded-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                        <img src=@item.Imagem class="w-100" style="border-radius: 5px" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6">
+                                    <h5>@item.nmPacote</h5>
+                                    <div class="d-flex flex-row">
+                                        <div class="text-danger mb-1 me-2">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2 text-muted small">
+                                        <span>.</span>
+                                        <span class="text-primary"> • </span>
+                                        <span></span>
+                                    </div>
+                                    <p class="text-truncate mb-4 mb-md-0">
+
+                                    </p>
+                                </div>
+                                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h4 class="mb-1 me-1">R$ @item.dsPreco</h4>
+
+                                    </div>
+                                    <h6 class="text-success"></h6>
+                                    @if (Session["tipoLogado2"] != null)
+                                    {
+                                        <div class="d-flex flex-column mt-4">
+                                            @Html.ActionLink("Editar", "EditarPlanosId", "Plano", new { id = item.IdPacote }, new { @class = "btn btn-warning btn-sm" })
+                                            @Html.ActionLink("Detalhes", "Details", new { id = item.IdPacote }, new { @class = "btn btn-primary btn-sm" })
+                                            @Html.ActionLink("Deletar ", "DeletarPacote", "Pacote", new { id = item.IdPacote}, new { @class = "btn btn-danger btn-sm" })
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        using (Html.BeginForm("AdicionarCarrinho", "Home", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" value="@item.IdPacote" />
+                                            <button type="submit" class="color btn btn-default azul">Adicionar ao carrinho</button>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

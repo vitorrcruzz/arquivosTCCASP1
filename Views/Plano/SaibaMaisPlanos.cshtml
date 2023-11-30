@@ -1,0 +1,29 @@
+﻿@model IEnumerable<AspViagens.Models.Banco.Plano>
+
+@{
+    ViewBag.Title = "SaibaMaisPlanos";
+}
+
+<h2>@ViewBag.nnPlano</h2>
+
+@foreach (var item in Model)
+{
+    <h4>   @item.dsCidade</h4>
+
+    <h2> moeda local?</h2>
+    <h3>  @item.dsMoeda</h3>
+
+
+    <h2> clima?</h2>
+    <h3>  @item.dsClima</h3>
+
+    <h2> idioma local?</h2>
+    <h3> @item.dsIdiomaP</h3>
+    <h3> @item.dsIdiomaS </h3>
+
+
+    <h2> estadia</h2>
+    <h3> inicio   @item.dsEstadiaInicio  </h3>
+    <h3> TERMINO  @item.dsEstadiaTermino </h3>
+    <h3> Total    @item.dsEstadiaTotal   </h3>
+}

@@ -1,0 +1,89 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mogra&display=swap');
+
+*{
+    font-family: Mulish;
+}
+
+body {
+    background-color: #f1f1f1f1;
+}
+
+
+/*TITULOS*/
+
+.titulo {
+    font-family: Mogra;
+    margin-bottom: 16rem;
+    font-size: 8rem;
+    letter-spacing: -6px;
+}
+
+.sub-carrossel {
+    font-family: Mulish;
+    color: #48D597;
+    margin-bottom: -1.5rem;
+    margin-left: -3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.subtitulo1 {
+    font-family: Mulish;
+    color: #000033;
+    font-weight: 700;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.text1{
+    color: white;
+}
+
+.card-title{
+    font-weight: bolder;
+}
+
+/*BOTOES*/
+.btn-dark-blue, .btn-dark-blue-large {
+    border-radius: 10px;
+    background-color: #000033;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    border: none;
+    color: white;
+}
+
+.btn-dark-blue-large{
+    width:16rem;
+}
+
+.btn-transp-carros {
+    background-color: transparent;
+    border-radius: 3rem;
+    border: 1px solid white;
+    padding: 0.7rem 1.3rem;
+    margin-top: -16rem;
+    color: white;
+    font-weight: 700;
+    margin-left: -7rem;
+    position: absolute;
+}
+
+.btn-transp-carros:hover{
+    background-color: white;
+    transition: 0.3s;
+    color: black;
+}
+
+
+/*INPUTS*/
+.input100{
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 1.1rem 2rem ;
+}
+

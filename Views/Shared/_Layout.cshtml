@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Além das Fronteiras</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("bootstrap.bundle.min.js/ bootstrap.bundle.js")
+    <script src="https://kit.fontawesome.com/f744b840f7.js" crossorigin="anonymous"></script>
+    <link href="~/Styles/navbar.css" rel="stylesheet" />
+    <link href="~/Styles/reset.css" rel="stylesheet" />
+</head>
+<body>
+    @if (Session["tipoLogado2"] == null)
+    {
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
+            <div class="container">
+                <b> @Html.ActionLink("Além das Fronteiras", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</b>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar a navegação" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (Session["tipoLogado1"] == null && Session["tipoLogado2"] == null)
+                        {
+                            <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Todos os Planos", "ListarTodosPacotes", "Pacote", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+
+                        @if (Session["tipoLogado1"] != null)
+                        {
+                            <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Todos os Planos", "ListarTodosPacotes", "Pacote", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+                    </ul>
+
+                    <div class="icons-nav">
+                        @if (Session["tipoLogado1"] == null && Session["tipoLogado2"] == null)
+                        {
+                            @Html.ActionLink(" ", "Carrinho", "Home", null, new { @class = "fa-solid fa-basket-shopping fa-xl login" })
+                            @Html.ActionLink(" ", "Login", "Login", null, new { @class = "fa-solid fa-user fa-xl login" })
+                        }
+                        else
+                        {
+                            if (Session["tipoLogado1"] != null)
+                            {
+                                @Session["dsLogin"]
+                                @Html.ActionLink(" ", "Logout", "Home", null, new { @class = "fa-solid fa-right-to-bracket fa-xl login" })
+                                @Html.ActionLink(" ", "Carrinho", "Home", null, new { @class = "fa-solid fa-basket-shopping fa-xl login" })
+
+                            }
+
+                            if (Session["tipoLogado2"] != null)
+                            {
+                                @Session["dsLogin"]
+                                @Html.ActionLink("Painel", "Dashboard", "Home", new { area = "" }, new { @class = "nav-link" })
+                                @Html.ActionLink(" ", "Logout", "Home", null, new { @class = "fa-solid fa-right-to-bracket fa-xl login" })
+                            }
+                            
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </nav>
+    }
+    <div class=" " style="overflow: hidden">
+        @RenderBody()
+
+    </div>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start text-light"
+            style="background-color: #000003; padding: 2rem 0 0 0">
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">Além das Fronteiras</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #48D597; height: 2px" />
+                        <p>
+                            Os melhores pacotes de intercambio do mercado voce só encontra aqui.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Pacotes</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #48D597; height: 2px" />
+                        <p>
+                            <a href="#!" class="text-light">Canadá</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">Londres</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">Orlando</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">México</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+
+                        <p>
+                            <a href="#!" class="text-light">Sua conta</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">Perguntas frequentes</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">Sobre nós</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-light">Ajuda</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Contato</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                            style="width: 60px; background-color: #48D597; height: 2px" />
+                        <p><i class="fas fa-home mr-3" style="color: #48D597"></i> São Paulo, SP 10012, BR</p>
+                        <p><i class="fas fa-envelope mr-3" style="color: #48D597"></i> alemdasfronteiras@contato.com</p>
+                        <p><i class="fas fa-phone mr-3" style="color: #48D597"></i> + 01 234 567 88</p>
+                        <p><i class="fas fa-print mr-3" style="color: #48D597"></i> + 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+        <!-- Copyright -->
+        <div class="text-center p-3"
+                                        <p>&copy; @DateTime.Now.Year - Além das Fronteiras</p>
+                        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

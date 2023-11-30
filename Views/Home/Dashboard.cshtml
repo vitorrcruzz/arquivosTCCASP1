@@ -1,0 +1,191 @@
+﻿<!-- Custom fonts for this template-->
+<link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<link href="~/Content/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="~/Styles/dashboard.css" rel="stylesheet" />
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar accordion bacana" id="accordionSidebar" style="background-color:black; padding: 1rem;">
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+        <br />
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            @Html.ActionLink("Início", "Dashboard", "Home", new { area = "" }, new { @class = "list-text" })
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <i class="fas fa-fw Example of credit-card-alt fa-credit-card-alt"></i>
+            @Html.ActionLink("Tabela Vendas", "ConsTdDetalhes", "Home", new { area = "" }, new { @class = "list-text" })
+        </li>
+        <br />
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <i class="fa-solid fa-inbox"></i>
+            @Html.ActionLink("Cadastar planos", "CadPacote", "Pacote", new { area = "" }, new { @class = "list-text" })
+        </li>
+        <br />
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <i class="fa-solid fa-list"></i>
+            @Html.ActionLink("Todos os planos", "ListarTodosPacotes", "Pacote", new { area = "" }, new { @class = "list-text" })
+        </li>
+        <br />
+        <li>
+            <i class="fa-solid fa-right-to-bracket"></i>
+            @Html.ActionLink("Sair", "Logout", "Home", new { @class = "list-text" })
+        </li>
+
+
+    </ul>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div>
+
+            <div class="container-fluid">
+                <br />
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Área do administrador</h1>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Vendas do último mês
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">R$00,00</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Planos vendidos
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- Content Column -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Pacotes mais vendidos</h6>
+                            </div>
+                            <div class="card-body">
+                                <p>
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mb-4">
+                        <!-- Approach -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                            </div>
+                            <div class="card-body">
+
+                                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                                <script type="text/javascript">
+
+                                 google.charts.load('current', { 'packages': ['corechart'] });
+                                 google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+
+                                 var years = @Html.Raw(Json.Encode(ViewBag.dtcompPacote));
+                                 var sales = @Html.Raw(Json.Encode(ViewBag.dspreçoPacote));
+
+                                    // Combine os dados em um array bidimensional
+                                    var chartData = [['Datas', 'Vendas']];
+                                    for (var i = 0; i < years.length; i++) {
+                                        chartData.push([years[i], parseFloat(sales[i])]);
+                                     }
+
+                                    var data = google.visualization.arrayToDataTable(chartData);
+
+                                     var options = {
+                                        title: 'Performace',
+                                        curveType: 'function',
+                                         legend: { position: 'bottom' }
+                                     };
+
+                                    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                                    chart.draw(data, options);
+                                    }
+                                </script>
+
+                                <body>
+                                    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+                                </body>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+

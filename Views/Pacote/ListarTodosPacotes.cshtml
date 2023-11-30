@@ -1,0 +1,115 @@
+﻿@model IEnumerable<AspViagens.Models.Banco.Pacote>
+
+@{
+    ViewBag.Title = "ListarTodosPacotes";
+}
+
+<h2>ListarTodosPacotes</h2>
+
+@if (TempData["Mensagem Erro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["Mensagem Erro"]
+    </div>
+}
+@if (TempData["Delete Erro"] != null)
+{
+<div class="alert alert-danger" role="alert">
+    <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+    @TempData["Delete Erro"]
+</div>
+}
+@if (TempData["Mensagem Erro ADM"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["Mensagem Erro ADM"]
+    </div>
+}
+
+@using (Html.BeginForm("FiltrarTodosPacotes", "Pacote", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="text" name="nmPacote" placeholder="Digite o interresse">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="text" name="nmPais" placeholder="Digite o nome do Pais">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="text" name="valor" placeholder="Digite um valor minimo e maximo, Exp:0/2000">
+        </div>
+    </div>
+
+    <input type="submit" name="Filtrar">
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPacote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nmPacote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dsPreco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dsPacote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imagem)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPacote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nmPacote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dsPreco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dsPacote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imagem)
+            </td>
+            <td>
+            </td>
+        </tr>
+        if (Session["tipoLogado2"] != null)
+        {
+            
+                @Html.ActionLink("Editar", "EditarPlanosId", "Plano", new { id = item.IdPacote }, new { @class = "btn btn-warning btn-sm" })
+                @Html.ActionLink("Detalhes", "Details", new { id = item.IdPacote }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Deletar ", "DeletarPacote", "Pacote", new { id = item.IdPacote }, new { @class = "btn btn-danger btn-sm" })
+            
+        }
+        else
+        {
+            using (Html.BeginForm("AdicionarCarrinho", "Home", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@item.IdPacote" />
+                <button type="submit" class="color btn btn-default azul">Adicionar ao carrinho</button>
+            }
+        }
+    }
+
+</table>
